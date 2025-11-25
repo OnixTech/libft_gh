@@ -6,7 +6,7 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/11/25 21:06:23 by luciano          ###   ########.fr       */
+/*   Updated: 2025/11/25 22:28:56 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -20,6 +20,7 @@ void	test_isascii(void);
 void	test_isprint(void);
 void	test_strlen(void);
 void	test_memset(void);
+void	test_bzero(void);
 
 int	main(void)
 {
@@ -30,6 +31,7 @@ int	main(void)
 	test_isprint();
 	test_strlen();
 	test_memset();
+	test_bzero();
 	return (0);
 }
 
@@ -258,6 +260,54 @@ void	test_memset(void)
 	}
 	memset(arr1, 0x0A, sizeof(arr1));
 	ft_memset(arr2, 0x0A, sizeof(arr2));
+	if (memcmp(arr1, arr2, sizeof(arr1)) == 0)
+			printf("\t--PASS--\n");
+	else
+	{
+			printf("\t**FAIL**\n");
+			i = 0;
+			while(i < n)
+				printf("%x", arr1[i++]);
+			printf("\n");
+			i = 0;
+			while(i < n)
+				printf("%x", arr2[i++]);
+	}
+}
+
+void	test_bzero(void)
+{
+	int	n;
+	int	arr1[10];
+	int	arr2[10];
+	int	i;	
+
+	n = 10;
+	printf("#_ FUNTION bzero:\n\tinput -> arr[10], sizeof(arr)\n");
+	i = -1;
+	while(++i < n)
+	{
+		arr1[i] = 0xff;
+		arr2[i] = 0xff;	
+	}
+	bzero(arr1, sizeof(arr1));
+	ft_bzero(arr2, sizeof(arr2));
+	if (memcmp(arr1, arr2, sizeof(arr1)) == 0)
+			printf("\t--PASS--\n");
+	else
+	{
+			printf("\t**FAIL**\n");
+			i = 0;
+			while(i < n)
+				printf("%x", arr1[i++]);
+			printf("\n");
+			i = 0;
+			while(i < n)
+				printf("%x", arr2[i++]);
+	}
+	bzero(arr1, (0));
+	ft_bzero(arr2, (0));
+	printf("\tinput -> arr[10], 0\n");
 	if (memcmp(arr1, arr2, sizeof(arr1)) == 0)
 			printf("\t--PASS--\n");
 	else
