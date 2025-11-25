@@ -6,11 +6,30 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/11/24 21:32:25 by luciano          ###   ########.fr       */
+/*   Updated: 2025/11/25 13:21:23 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
+
+void	test_alpha(void);
+void	test_digit(void);
+void	test_alnum(void);
+void	test_isascii(void);
+void	test_isprint(void);
+void	test_strlen(void);
+
+int	main(void)
+{
+	test_alpha();
+	test_digit();
+	test_alnum();
+	test_isascii();
+	test_isprint();
+	test_strlen();
+	return (0);
+}
 
 void test_alpha(void)
 {
@@ -132,11 +151,90 @@ void test_alnum(void)
        	}
 }
 
-int	main(void)
-{
-	test_alpha();
-	test_digit();
-	test_alnum();
-	return (0);
+void	test_isascii(void)
+{	
+	int	c[128];
+	int	i;
+	
+	i = -1;
+	while(i++ < 127)
+		c[i] = i;
+	printf("#_ FUNTION isascii:\n\tinputs -> '0' '1' '2'...'127'\n");
+	i = 0;
+	while(i < 128)
+	{
+		if (ft_isascii(c[i]))
+			i++;
+		else
+		{
+			printf("\tFAIL IN -> %d\n", c[i]);
+			break;
+		}
+		if (i == 128)
+			printf("\t--PASS--\n");
+	}
+	printf("\tinput -> '-1' '128'\n");
+	if (!ft_isascii(-1))
+		if(!ft_isascii(128))
+			printf("\t--PASS--\n");
 }
 
+void	test_isprint(void)
+{	
+	int	c[97];
+	int	i;
+	
+	i = 31;
+	while(i++ < 127)
+		c[i - 32] = i;
+	printf("#_ FUNTION isprint:\n\tinputs -> '32' '33' '34'...'126'\n");
+	i = 32;
+	while(i < 127)
+	{
+		if (ft_isprint(c[i - 32]))
+			i++;
+		else
+		{
+			printf("\tFAIL IN -> %d\n", c[i - 32]);
+			break;
+		}
+		if (i == 127)
+			printf("\t--PASS--\n");
+	}
+	printf("\tinput -> '31' '127'\n");
+	if (!ft_isprint(31))
+	{
+		if(!ft_isprint(127))
+			printf("\t--PASS--\n");
+	}
+	else
+	{
+			printf("\tFAIL IN -> %d\n", c[i - 32]);
+	}
+}
+
+void	test_strlen(void)
+{
+	char	*str;
+	
+	str = "Hola que tal";
+	printf("#_ FUNTION strlen:\n\tinput -> Hola que tal\n");
+	if (strlen(str) == ft_strlen(str))
+			printf("\t--PASS--\n");
+	else
+	{
+			printf("\t**FAIL**\n");
+			printf("\tstrlen ->    %i\n", strlen(str));
+			printf("\tft_strlen -> %i\n", ft_strlen(str));
+	}
+	str = "";
+	printf("\tinputs -> '' (empty string)\n");
+	if (strlen(str) == ft_strlen(str))
+			printf("\t--PASS--\n");
+	else
+	{
+			printf("\t**FAIL**\n");
+			printf("\tstrlen ->    %i\n", strlen(str));
+			printf("\tft_strlen -> %i\n", ft_strlen(str));
+	}	
+}

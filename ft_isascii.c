@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: luciano <lupetill@student.42berlin.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/19 14:20:43 by lupetill          #+#    #+#             */
-/*   Updated: 2025/11/25 13:23:02 by luciano          ###   ########.fr       */
+/*   Created: 2025/11/25 09:57:30 by luciano           #+#    #+#             */
+/*   Updated: 2025/11/25 10:14:00 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H_
-#define LIBFT_H_
 
-int	ft_isalpha(int c);
-int	ft_isdigit(int c);
-int	ft_isalnum(int c);
-int	ft_isascii(int c);
-int	ft_isprint(int c);
-unsigned int	ft_strlen(const char *s);
-#endif // LIBFT_H
-
+int	ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
+}
