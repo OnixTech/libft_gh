@@ -6,7 +6,7 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/11/26 16:41:22 by lupetill         ###   ########.fr       */
+/*   Updated: 2025/11/26 18:40:49 by lupetill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -337,8 +337,7 @@ void	test_memcpy(void)
 	unsigned char	dst2[10];
 	int				i;
 
-	printf("#_ FUNTION memcpy:\n\t*_input -> dst[10], src = 0 1 2...9,
-		sizeof(dst)\n");
+	printf("#_ FUNTION memcpy:\n\t*_input -> dst[10], src = 0 1 2...9, sizeof(dst)\n");
 	i = 0;
 	while (i < 10)
 	{
@@ -384,8 +383,7 @@ void	test_memmove(void)
 	unsigned char	*d2;
 	int				i;
 
-	printf("#_ FUNTION memmove:\n\t*_input -> dst = KLMNOPQRST,
-		src = ABCDEFGHIJ, 10\n");
+	printf("#_ FUNTION memmove:\n\t*_input -> dst = KLMNOPQRST, src = ABCDEFGHIJ, 10\n");
 	i = 0;
 	while (i < 10)
 	{
@@ -495,16 +493,16 @@ void	test_strlcpy(void)
 	printf("#_ FUNTION strlcpy:\n\t*_input -> dst[6], src = Hola, n = 6\n");
 	if (strcmp(dest1, dest2) == 0)
 	{
-		printf("\tstrlcpy return (-> %i\n", a));
+		printf("\tstrlcpy return -> %i\n", a);
 		printf("\tdst = %s\n", dest1);
-		printf("\tft_strlcpy return (-> %i\n", b));
+		printf("\tft_strlcpy return -> %i\n", b);
 		printf("\tdst = %s\n", dest2);
 		printf("\t--PASS--\n");
 	}
 	else
 	{
 		printf("\t**FAIL**\n");
-		printf("\treturn (-> %i", b));
+		printf("\treturn -> %i", b);
 		printf("\ndst = %s", dest2);
 	}
 }
