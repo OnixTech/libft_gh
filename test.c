@@ -6,12 +6,13 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/11/26 15:59:44 by lupetill         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:41:22 by lupetill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include <stdio.h>
 #include <string.h>
+#include <bsd/string.h>
 
 void	test_alpha(void);
 void	test_digit(void);
@@ -23,6 +24,7 @@ void	test_memset(void);
 void	test_bzero(void);
 void	test_memcpy(void);
 void	test_memmove(void);
+void	test_strlcpy(void);
 
 int	main(void)
 {
@@ -36,6 +38,7 @@ int	main(void)
 	test_bzero();
 	test_memcpy();
 	test_memmove();
+	test_strlcpy();
 	return (0);
 }
 
@@ -469,5 +472,34 @@ void	test_memmove(void)
 			i = 0;
 			while(i < 10)
 				printf("%c", d2[i++]);
+	}
+}
+
+void test_strlcpy(void)
+{
+	char			dest_size;
+	char			dest1[dest_size];
+	char			dest2[dest_size];
+	char			src[] = {"Hola"};
+	unsigned int	a;
+	unsigned int	b;
+
+	dest_size = 6;
+	a = strlcpy(&dest1[0], &src[0], dest_size);
+	b = ft_strlcpy( &dest2[0], &src[0], dest_size);
+	printf("#_ FUNTION strlcpy:\n\t*_input -> dst[6], src = Hola, n = 6\n");
+	if (strcmp(dest1, dest2) == 0)
+	{
+		printf("\tstrlcpy return -> %i\n", a);
+		printf("\tdst = %s\n", dest1);
+		printf("\tft_strlcpy return -> %i\n", b);
+		printf("\tdst = %s\n", dest2);
+		printf("\t--PASS--\n");
+	}
+	else
+	{
+		printf("\t**FAIL**\n");
+		printf("\treturn -> %i", b);
+		printf("\ndst = %s", dest2);
 	}
 }
