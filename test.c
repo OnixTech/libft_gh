@@ -6,11 +6,11 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/11/26 18:40:49 by lupetill         ###   ########.fr       */
+/*   Updated: 2025/11/27 10:24:43 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <bsd/string.h>
+//#include <bsd/string.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -25,6 +25,7 @@ void	test_bzero(void);
 void	test_memcpy(void);
 void	test_memmove(void);
 void	test_strlcpy(void);
+void	test_strlcat(void);
 
 int	main(void)
 {
@@ -39,6 +40,7 @@ int	main(void)
 	test_memcpy();
 	test_memmove();
 	test_strlcpy();
+	test_strlcat();
 	return (0);
 }
 
@@ -481,8 +483,8 @@ void	test_memmove(void)
 void	test_strlcpy(void)
 {
 	char			dest_size;
-	char			dest1[dest_size];
-	char			dest2[dest_size];
+	char			dest1[6];
+	char			dest2[6];
 	char			src[] = {"Hola"};
 	unsigned int	a;
 	unsigned int	b;
@@ -504,5 +506,56 @@ void	test_strlcpy(void)
 		printf("\t**FAIL**\n");
 		printf("\treturn -> %i", b);
 		printf("\ndst = %s", dest2);
+	}
+}
+
+void	test_strlcat(void)
+{
+	char			dest_size;
+	dest_size = 17;
+	char			dest_size2;
+	dest_size2 = 19;
+	char			dest1[dest_size] = {"Hola, como"};
+	char			dest2[dest_size] = {"Hola, como"};
+	char			dest3[dest_size2] = {"Hola, como esta el"};
+	char			dest4[dest_size2] = {"Hola, como esta el"};
+	char			src[] = {"estas?"};
+	char			src2[] = {"esta el nene?"};
+	unsigned int	a;
+	unsigned int	b;
+
+	a = strlcat(dest1, src, dest_size);
+	b = ft_strlcat(dest2, src, dest_size);
+	printf("#_ FUNTION strlcat:\n\t*_input -> dst[16] = 'Hola, como', src = 'esta el nene?', size = 17\n");
+	if (strcmp(dest1, dest2) == 0)
+	{
+		printf("\tstrlcat return -> %i\n", a);
+		printf("\tdst = %s\n", dest1);
+		printf("\tft_strlcat return -> %i\n", b);
+		printf("\tdst = %s\n", dest2);
+		printf("\t--PASS--\n");
+	}
+	else
+	{
+		printf("\t**FAIL**\n");
+		printf("\treturn -> %i", b);
+		printf("\ndst = %s", dest2);
+	}
+	a = strlcat(dest1, src2, dest_size);
+	b = ft_strlcat(dest2, src2, dest_size);
+	printf("\t*_input -> dst[16] = 'Hola, como', src = 'esta el nene?', size = 16 | size - dst length - 1 < 0\n");
+	if (strcmp(dest1, dest2) == 0)
+	{
+		printf("\tstrlcat return -> %i\n", a);
+		printf("\tdst = %s\n", dest3);
+		printf("\tft_strlcat return -> %i\n", b);
+		printf("\tdst = %s\n", dest4);
+		printf("\t--PASS--\n");
+	}
+	else
+	{
+		printf("\t**FAIL**\n");
+		printf("\treturn -> %i", b);
+		printf("\ndst = %s", dest4);
 	}
 }
