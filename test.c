@@ -6,7 +6,7 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/11/30 21:47:13 by luciano          ###   ########.fr       */
+/*   Updated: 2025/12/01 12:35:19 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -30,6 +30,7 @@ void	test_toupper(void);
 void	test_tolower(void);
 void	test_strchr(void);
 void	test_strrchr(void);
+void	test_strncmp(void);
 
 int	main(void)
 {
@@ -49,6 +50,7 @@ int	main(void)
 	test_tolower();
 	test_strchr();
 	test_strrchr();
+	test_strncmp();
 	return (0);
 }
 
@@ -731,7 +733,7 @@ void	test_strrchr(void)
 	{	
 		printf("\t**FAIL**\n");	
 		printf("\t strrchr return -> %s\n", strrchr(s, '\0'));
-		printf("\t ft_strchr return -> %s\n", ft_strrchr(s, '\0'));
+		printf("\t ft_strrchr return -> %s\n", ft_strrchr(s, '\0'));
 	}
 	printf("\n\t*_input -> s = Hola, como estas, c = y\n");
 	if (ft_strchr(s, 'y') == NULL)
@@ -741,5 +743,36 @@ void	test_strrchr(void)
 		printf("\t**FAIL**\n");	
 		printf("\t strrchr return -> %s\n", strrchr(s, 'y'));
 		printf("\t ft_strrchr return -> %s\n", ft_strrchr(s, 'y'));
+	}
+}
+
+void	test_strncmp(void)
+{
+	printf("#_ FUNCTION strncmp:\n\t*_input -> s1 = "", s2 = "", n = 2\n");
+	if (ft_strncmp("", "", 2) == 0)
+		printf("\t--PASS--\n");
+	else
+	{
+		printf("\t**FAIL**\n");
+		printf("\t strncmp return -> %d\n", strncmp("","", 2));
+		printf("\t ft_strncmp return -> %d\n", ft_strncmp("","", 2));
+	}
+	printf("\n\t*_input -> s1 = Hola s2 = Hala, n = 2\n");
+	if (ft_strncmp("Hola","Hala", 2))
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t strncmp return -> %d\n", strncmp("Hola","Hala", 2));
+		printf("\t ft_strncmp return -> %d\n", ft_strncmp("Hola","Hala", 2));
+	}
+	printf("\n\t*_input -> s1 = coMo, s2 = como, n = 4\n");
+	if (ft_strncmp("coMo", "como", 4) < 0)
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t strncmp return -> %d\n", strncmp("coMo","como", 4));
+		printf("\t ft_strncmp return -> %d\n", ft_strncmp("coMo","como", 4));
 	}
 }
