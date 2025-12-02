@@ -6,7 +6,7 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/12/01 12:35:19 by luciano          ###   ########.fr       */
+/*   Updated: 2025/12/02 11:16:06 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -31,6 +31,8 @@ void	test_tolower(void);
 void	test_strchr(void);
 void	test_strrchr(void);
 void	test_strncmp(void);
+void	test_memchr(void);
+void	test_memcmp(void);
 
 int	main(void)
 {
@@ -51,6 +53,8 @@ int	main(void)
 	test_strchr();
 	test_strrchr();
 	test_strncmp();
+	test_memchr();
+	test_memcmp();
 	return (0);
 }
 
@@ -774,5 +778,86 @@ void	test_strncmp(void)
 		printf("\t**FAIL**\n");	
 		printf("\t strncmp return -> %d\n", strncmp("coMo","como", 4));
 		printf("\t ft_strncmp return -> %d\n", ft_strncmp("coMo","como", 4));
+	}
+}
+
+void	test_memchr(void)
+{	
+	char	s[] = "Hola, como estas?";
+
+	printf("#_ FUNCTION memchr:\n\t*_input -> s = Hola, como estas?, c = m, n = 10\n");
+	if (memcmp(ft_memchr(s, 'm', 10), memchr(s, 'm', 10), 9) == 0)
+	{
+		printf("\t--PASS--\n");
+		printf("\t memchr return -> %s\n", (char *)memchr(s, 'm', 10));
+		printf("\t ft_memchr return -> %s\n",(char *)ft_memchr(s, 'm', 10));
+	}
+	else
+	{
+		printf("\t**FAIL**\n");
+		printf("\t memchr return -> %s\n", (char *)memchr(s, 'm', 10));
+		printf("\t ft_memchr return -> %s\n",(char *)ft_memchr(s, 'm', 10));
+	}
+	printf("\n\t*_input -> s = Hola, como estas?, c = \\0, n = 0\n");
+	if (memcmp(ft_memchr(s, '\0', 0), memchr(s, '\0', 0), 0) == 0)
+	{
+		printf("\t--PASS--\n");
+		printf("\t memchr return -> %s\n", (char *)memchr(s, '\0', 0));
+		printf("\t ft_memchr return -> %s\n",(char *)ft_memchr(s, '\0', 0));
+	}
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t memchr return -> %s\n", (char *)memchr(s, '\0', 0));
+		printf("\t ft_memchr return -> %s\n", (char *)ft_memchr(s, '\0', 0));
+	}
+	printf("\n\t*_input -> s = Hola, como estas, c = y, n = 4\n");
+	if ((void *)ft_memchr(s, 'y', 4) == NULL)
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t memchr return -> %s\n", (char *)memchr(s, 'y', 4));
+		printf("\t ft_memchr return -> %s\n", (char *)ft_memchr(s, 'y', 4));
+	}
+}
+
+void	test_memcmp(void)
+{
+	printf("#_ FUNCTION memcmp:\n\t*_input -> s1 = "", s2 = "", n = 2\n");
+	if (ft_memcmp("", "", 2) == 0)
+		printf("\t--PASS--\n");
+	else
+	{
+		printf("\t**FAIL**\n");
+		printf("\t memcmp return -> %d\n", memcmp("","", 2));
+		printf("\t ft_memcmp return -> %d\n", ft_memcmp("","", 2));
+	}
+	printf("\n\t*_input -> s1 = Hola s2 = Hala, n = 2\n");
+	if (ft_memcmp("Hola","Hala", 2))
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t memcmp return -> %d\n", memcmp("Hola","Hala", 2));
+		printf("\t ft_memcmp return -> %d\n", ft_memcmp("Hola","Hala", 2));
+	}
+	printf("\n\t*_input -> s1 = coMo, s2 = como, n = 4\n");
+	if (ft_memcmp("coMo", "como", 4) < 0)
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t memcmp return -> %d\n", memcmp("coMo","como", 4));
+		printf("\t ft_memcmp return -> %d\n", ft_memcmp("coMo","como", 4));
+	}
+	printf("\n\t*_input -> s1 = co\\200o, s2 = como, n = 4\n");
+	if (ft_memcmp("co\200o", "como", 4) > 0)
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t memcmp return -> %d\n", memcmp("co\200o", "como", 4));
+		printf("\t ft_memcmp return -> %d\n", ft_memcmp("co\200o", "como", 4));
 	}
 }
