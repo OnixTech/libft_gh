@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luciano <lupetill@student.42berlin.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 10:07:17 by luciano           #+#    #+#             */
-/*   Updated: 2025/12/02 16:16:22 by luciano          ###   ########.fr       */
+/*   Created: 2025/12/02 13:35:57 by luciano           #+#    #+#             */
+/*   Updated: 2025/12/02 18:22:59 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_atoi(const char *str)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	size_t	i;
+	int		sign;
+	long	result;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	if (n == 0)
-		return (0);
+	result = 0;
+	sign = 1;
 	i = 0;
-	while (i < n - 1 && str1[i] && str2[i] && str1[i] == str2[i])
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
-	return (str1[i] - str2[i]);
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (str[i] && (str[i] >= 48 && str[i] <= 57))
+	{
+		result *= 10;
+		result += str[i++] - 48;
+	}
+	return ((int)result * sign);
 }
