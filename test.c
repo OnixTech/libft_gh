@@ -6,7 +6,7 @@
 /*   By: lupetill <lupetill@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:42:39 by lupetill          #+#    #+#             */
-/*   Updated: 2025/12/02 11:16:06 by luciano          ###   ########.fr       */
+/*   Updated: 2025/12/02 13:32:07 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -33,6 +33,7 @@ void	test_strrchr(void);
 void	test_strncmp(void);
 void	test_memchr(void);
 void	test_memcmp(void);
+void	test_strnstr(void);
 
 int	main(void)
 {
@@ -55,6 +56,7 @@ int	main(void)
 	test_strncmp();
 	test_memchr();
 	test_memcmp();
+	test_strnstr();
 	return (0);
 }
 
@@ -861,3 +863,44 @@ void	test_memcmp(void)
 		printf("\t ft_memcmp return -> %d\n", ft_memcmp("co\200o", "como", 4));
 	}
 }
+
+void	test_strnstr(void)
+{	
+	printf("#_ FUNCTION strnstr:\n\t*_input -> s1 = "", s2 = "", n = 2\n");
+	if (ft_strnstr("", "", 2) == strnstr("", "", 2))
+		printf("\t--PASS--\n");
+	else
+	{
+		printf("\t**FAIL**\n");
+		printf("\t strnstr return -> %s\n", strnstr("","", 2));
+		printf("\t ft_strnstr return -> %s\n", ft_strnstr("","", 2));
+	}
+	printf("\n\t*_input -> s1 = Hola, como estas? s2 = como = 18\n");
+	if (ft_strnstr("Hola, como estas?","como", 18))
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t strnstr return -> %s\n", strnstr("Hola, como estas?","como", 18));
+		printf("\t ft_strnstr return -> %s\n", ft_strnstr("Hola, como estas?","como", 18));
+	}
+	printf("\n\t*_input -> Hola, como estas?, Hola, como estas?, 8\n");
+	if (ft_strnstr("Hola, como estas?", "Hola, como estas?", 8) == strnstr("Hola, como estas?", "Hola, como estas?", 8))
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t strnstr return -> %s\n", strnstr("Hola, como estas?", "Hola, como estas?", 8));
+		printf("\t ft_strnstr return -> %s\n", ft_strnstr("Hola, como estas?", "Hola, como estas?", 8));
+	}
+	printf("\n\t*_input -> Hola, como estas?, casa, 18)\n");
+	if (ft_strnstr("Hola, como estas?", "casa", 18) == strnstr("Hola, como estas?", "casa", 18))
+		printf("\t--PASS--\n");
+	else
+	{	
+		printf("\t**FAIL**\n");	
+		printf("\t strnstr return -> %s\n", strnstr("Hola, como estas?", "casa", 18));
+		printf("\t ft_strnstr return -> %s\n", ft_strnstr("Hola, como estas?", "casa", 18));
+	}
+}
+
