@@ -35,6 +35,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 /*
 #include <stdio.h>
+
 char	adapter(unsigned int i, char c)
 {
 	(void)i;
@@ -44,7 +45,7 @@ int	main(void)
 {
 	char	*original;
 	char	*after;
-	
+
 	original = "hola";
 	after = ft_strmapi(original, adapter);
 	printf("original - > %s\n", original);
