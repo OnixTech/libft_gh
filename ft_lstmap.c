@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luciano <lupetill@student.42berlin.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 10:32:57 by luciano           #+#    #+#             */
-/*   Updated: 2025/12/10 12:19:17 by luciano          ###   ########.fr       */
+/*   Created: 2025/12/10 12:35:48 by luciano           #+#    #+#             */
+/*   Updated: 2025/12/10 14:03:33 by luciano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
+	t_list	*nlst;
 	t_list	*node;
-	t_list	*tmp;
+	void	*content;
 
-	if (!lst || !del)
-		return ;
-	node = *lst;
-	while (node)
+	if (!f || !del)
+		return (NULL);
+	nlst = NULL;
+	while (lst)
 	{
-		tmp = node->next;
-		del(node->content);
-		free(node);
-		node = tmp;
+		content = f(lst->content);
+		node = ft_lstnew(content);
+		if (!node)
+		{
+			del(content);
+			ft_lstclear(&nlst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&nlst, node);
+		lst = lst->next;
 	}
-	*lst = NULL;
+	return (nlst);
 }
 /*
 #include <stdio.h>
+
+void	*tox(void *ptr)
+{
+	(void)ptr;
+	return ("X");
+}
 
 int	main(void)
 {
@@ -60,16 +73,15 @@ int	main(void)
 	t_list *tmp = head;
 	while (tmp)
 	{
-				printf("%s", (char *)tmp->content);
+		printf("%s", (char *)tmp->content);
 				tmp = tmp->next;
 	}
-	printf("\nAfter call ft_lstclear:\n->");
-	ft_lstclear(&head, free);
-	tmp = head;
-	while (tmp)
+	printf("\nNew list:\n->");
+	t_list *ntmp = ft_lstmap(head, tox, free);
+	while (ntmp)
 	{
-				printf("%s", (char *)tmp->content);
-				tmp = tmp->next;
+				printf("%s", (char *)ntmp->content);
+				ntmp = ntmp->next;
 	}
 	printf("\n");
 	return (0);
