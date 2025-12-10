@@ -1,6 +1,6 @@
 *This project has been created as pasrt of the 42 curriculum by lupetill.*
 
-##Description
+## Description:
 The main task of this project is to write your own library of functions in C language for use them as the original functions. The project is divided in three parts where the Part 1 contains the Libc functions, Part 2 with additional functions that are not included in the libc and Part 3 where you have to manipulate linked list using a structure. 
 
 ### **Part 1 - Libc**
@@ -32,7 +32,7 @@ The main task of this project is to write your own library of functions in C lan
 - `ft_lstiter`
 - `ft_lstmap`
  
-##Instructions
+## Instructions:
 Each function should contain his own file named with the prefix "ft_". A Makefile should implement to compile the library into the libft.a library with the flags -Wall -Wextra -Werror.
 Commands:
 make         *builds the libft.a*
